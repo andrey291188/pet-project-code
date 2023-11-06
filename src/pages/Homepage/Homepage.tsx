@@ -27,7 +27,7 @@ const Homepage = () => {
             <Description>
               Although our server does not store the password in the database in
               clear text, we still do not recommend entering the real password
-              for your email, you can also use a demo profile
+              for your email
             </Description>
             <ButtonHomepage to="/ads">
               Watch ads
