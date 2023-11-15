@@ -8,6 +8,7 @@ import PublicRoute from "./PublicRoute/PublicRoute";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import { currentUserThunk } from "../store/authorization/thunkAuth";
 import { Loader } from "./Loader/Loader";
+import { getAllAds } from "service/adsRequest";
 
 const Homepage = lazy(() => import("../pages/Homepage/Homepage"));
 const Ads = lazy(() => import("../pages/Ads/Ads"));
@@ -32,6 +33,7 @@ function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+     getAllAds()
      dispatch(currentUserThunk());
   }, [dispatch]);
 

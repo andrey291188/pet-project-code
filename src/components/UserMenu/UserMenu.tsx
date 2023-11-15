@@ -46,7 +46,7 @@ const UserMenu: React.FC = () => {
      navigate("/")
     }
 
-  const handleMenuClick:ClickHandler = (event) => {
+  const handleMenuClick: ClickHandler = (event) => {
     setMenuActive(!menuActive);
   };
 
