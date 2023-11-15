@@ -8,9 +8,15 @@ import {
   Title,
 } from "./Homepage.styled";
 import banner from "../../imgFolder/banner.jpg";
+import { useEffect } from "react";
+import { getAllAds } from "service/adsRequest";
 
 
 const Homepage = () => {
+  useEffect(() => {
+    getAllAds()
+   
+ }, []);
 
   return (
     <HomepageSection>
