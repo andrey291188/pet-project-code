@@ -1,7 +1,6 @@
-import { useSelector } from "react-redux";
 import UserMenu from "../UserMenu/UserMenu";
 import { Header, ItemNavigate, LinkNav, ListNavigate } from "./Headers.styled";
-import { RootStore } from "../../store/store";
+import { RootStore, useAppSelector } from "../../store/store";
 import AdsMenu from "../AdsMenu/AdsMenu";
 
 const authSelector = (state: RootStore) => {
@@ -9,7 +8,7 @@ const authSelector = (state: RootStore) => {
 };
 
 const Headers = () => {
-  const { isLoggedIn } =  useSelector(authSelector)
+  const { isLoggedIn } =  useAppSelector(authSelector)
 
   return (
     <Header>

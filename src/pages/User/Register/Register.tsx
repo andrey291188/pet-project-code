@@ -5,9 +5,9 @@ import VerifyLink from "../../../components/VerifyLink/VerifyLink";
 import { Loader } from "../../../components/Loader/Loader";
 
 const Register = () => {
-  const [formVisible, setFormVisible] = useState<boolean>(false);
+  const [formVisible, setFormVisible] = useState(false);
   const [loader, setLoader] = useState(false);
-  const [linkVerify, setLinkVerify] = useState<string>("");
+  const [linkVerify, setLinkVerify] = useState("");
 
   return (
     <>

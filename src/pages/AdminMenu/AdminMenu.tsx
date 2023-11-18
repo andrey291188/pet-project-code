@@ -36,8 +36,8 @@ interface DataDeals {
 const AdminMenu = () => {
   const [userInfoData, setUserInfoData] = useState<DataUser[]>([]);
   const [dealsIfnoData, setDealsInfoData] = useState<DataDeals[]>([]);
-  const [loader, setLoader] = useState<boolean>(false);
-  const [changeInfo, setChangeInfo] = useState<boolean>(false);
+  const [loader, setLoader] = useState(false);
+  const [changeInfo, setChangeInfo] = useState(false);
 
   useEffect(() => {
     changeInfo ? getRequestDeals() : getRequestUser();

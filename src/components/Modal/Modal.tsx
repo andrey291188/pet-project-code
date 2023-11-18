@@ -4,7 +4,7 @@ import { Modals, Overlay } from './Modal.stayled';
 
 const Modal = ({children, toggleModal}: any) => {
 
-  const modalRoot: any = document.querySelector('#modal-root')
+  const modalRoot = document.querySelector('#modal-root') as HTMLDivElement
 
 
   useEffect(()=>{

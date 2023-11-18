@@ -16,6 +16,11 @@ export const ButtonAdsMenu = styled.button<StyledButtonProps>`
   color: ${(props) => (props.$active ? "black" : "white")};
   display: flex;
   align-items: center;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 1000ms;
+  &:hover {
+   color: greenyellow;
+   border: solid 2px greenyellow;
+  }
 `;
 
 export const Overlay = styled.div`

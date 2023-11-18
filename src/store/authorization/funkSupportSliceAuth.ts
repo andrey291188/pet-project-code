@@ -6,20 +6,20 @@ interface User {
 }
 
 interface State {
-  isLoading?: boolean;
-  isRefreshing?: boolean;
-  error?: string;
-  user?: User | null;
-  email?: string;
-  avatar?: string;
-  access_token?: string | null;
-  isLoggedIn?: boolean;
-  access?: boolean
+  isLoading: boolean;
+  isRefreshing: boolean;
+  error: string;
+  user: User | null;
+  email: string;
+  avatar: string;
+  access_token: string | null;
+  isLoggedIn: boolean;
+  access: boolean
 }
 
 interface Action {
   type: string;
-  payload?: any;
+  payload: any;
 }
 
 export const handlePending = (state: State): void => {

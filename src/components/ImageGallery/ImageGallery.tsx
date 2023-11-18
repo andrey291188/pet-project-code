@@ -7,7 +7,7 @@ interface ImageGalleryProps {
   }
 
 const ImageGallery: React.FC<ImageGalleryProps> = ({data}) => {
-    const [indexElement, setIndexElement] = useState<number>(0)
+    const [indexElement, setIndexElement] = useState(0)
     const showImg = data !== null && data.length !== 0 ? data[indexElement] : defaultImg
     
     const changeIndexItem = (value: number) => {

@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 
 export const Loader = () => {
     
-    const modalRoot: any = document.querySelector('#modal-root')
+    const modalRoot = document.querySelector('#modal-root') as HTMLDivElement
 
     return (
         createPortal(

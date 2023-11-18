@@ -29,12 +29,12 @@ const AvatarUpdate: React.FC<AvatarUpdateProps> = ({ toggleModal }) => {
     }
   };
 
-  const handleChange = async (e: any) => {
-    const file = e.target.files[0];
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
     setSelectedFiles(file);
   };
 
-  const handleSubmit = async (values: any) => {
+  const handleSubmit = async (values: React.FormEvent<HTMLFormElement>) => {
     values.preventDefault();
     if (selectedFiles === undefined) {
         toast.warn("Choose an image")

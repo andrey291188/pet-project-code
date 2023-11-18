@@ -44,9 +44,14 @@ export const LinkNav = styled(NavLink)`
   color: white;
   display: flex;
   align-items: center;
-
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 1000ms;
   &.active {
         background-color: #03e9f4;
         color: black;
-    }
+    };
+  
+    &:hover {
+   color: greenyellow;
+   border: solid 2px greenyellow;
+  }
 `;

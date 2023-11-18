@@ -9,7 +9,7 @@ import {
 } from "../../service/authRequest";
 import { toast } from "react-toastify";
 
-interface MyErrorType {
+export interface MyErrorType {
   message: string;
 }
 
@@ -17,7 +17,7 @@ interface RootState {
   auth: {
     access_token: string;
     user: string;
-    isLoadingAuth: boolean;
+    isLoading: boolean;
     error: string;
     isLoggedIn: boolean;
     isRefreshing: boolean;
@@ -46,9 +46,9 @@ export const logInThunk = createAsyncThunk(
       toast.success("You have seccessfully logged in!");
       return data;
     } catch (error) {
-      const errorData = error as MyErrorType;
-      toast.error(errorData.message);
-      return rejectWithValue(errorData.message);
+      const {message} = error as MyErrorType;
+      toast.error(message);
+      return rejectWithValue(message);
     }
   }
 );
@@ -61,9 +61,9 @@ export const logOutThunk = createAsyncThunk(
       clearAuthHeader();
       toast.warn("You seccessfully logged out!");
     } catch (error) {
-      const errorData = error as MyErrorType;
-      toast.error(errorData.message);
-      return rejectWithValue(errorData.message);
+      const {message} = error as MyErrorType;
+      toast.error(message);
+      return rejectWithValue(message)
     }
   }
 );
@@ -83,22 +83,24 @@ export const currentUserThunk = createAsyncThunk(
       toast.success("You have seccessfully logged in!");
       return data;
     } catch (error) {
-      const errorData = error as MyErrorType;
-      toast.error(errorData.message);
-      return rejectWithValue(errorData.message);
+      const {message} = error as MyErrorType;
+      toast.error(message);
+      return rejectWithValue(message)
     }
   }
 );
 
 export const updateAvatarThunk = createAsyncThunk(
   "auth/updateAvatar",
-  async (formData: FormData) => {
+  async (formData: FormData, {rejectWithValue}) => {
     try {
       const { avatarURL } = await avatarsReplace(formData);
       toast.success("Seccessfully added");
       return avatarURL;
-    } catch (error: any) {
-      toast.warning(error.message);
+    } catch (error) {
+      const {message} = error as MyErrorType;
+      toast.error(message);
+      return rejectWithValue(message)
     }
   }
 );

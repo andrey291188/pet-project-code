@@ -3,6 +3,7 @@ import { updateAdsUser } from "../../service/adsRequest";
 import { ButtonSubmit, FormikForm, InputField, InputFieldDesc, Label, RegisterFormTitle, SupportFormik, Wrapper  } from "../FormCreateAds/FormCreatedAds.styled";
 import { Loader } from "../Loader/Loader";
 import { useEffect, useState } from "react";
+import { MyErrorType } from "store/authorization/thunkAuth";
 
 interface Data {
   active: boolean;
@@ -25,7 +26,7 @@ interface FormCreateAdsProps {
 const FormEditAds: React.FC<FormCreateAdsProps> =  ({getRequest, statusForm, idAds, editData}) => {
   const [loader, setLoader] = useState(false);
   const [editTitle, setEditTitle] = useState<string>("")
-  const [editPrice, setEditPrice] = useState<number | null>(null)
+  const [editPrice, setEditPrice] = useState<string | number>("")
   const [editDescription, setEditDescription] = useState<string>("")
   const {title, price, description} = editData[0]
 
@@ -41,8 +42,9 @@ const FormEditAds: React.FC<FormCreateAdsProps> =  ({getRequest, statusForm, idA
         try {
           await updateAdsUser(idAds, {title: editTitle, description: editDescription, price: editPrice})
           toast.success("Seccessfully created")
-        } catch (error: any) {
-          toast.warn(error.message)
+        } catch (error) {
+          const { message } = error as MyErrorType;
+          toast.warn(message)
           setLoader(false)
           return
         } finally {
@@ -52,7 +54,7 @@ const FormEditAds: React.FC<FormCreateAdsProps> =  ({getRequest, statusForm, idA
         statusForm(false)
       };
 
-      const handleChangeInput = (e:any) => {
+      const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target
         
         switch (name) {

@@ -2,8 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./Loyaout";
 import "../App.css";
 import { lazy, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { RootStore, useAppDispatch } from "../store/store";
+import { RootStore, useAppDispatch, useAppSelector } from "../store/store";
 import PublicRoute from "./PublicRoute/PublicRoute";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import { currentUserThunk } from "../store/authorization/thunkAuth";
@@ -28,7 +27,7 @@ const authSelector = (state: RootStore) => {
 };
 
 function App() {
-  const { isRefreshing } = useSelector(authSelector);
+  const { isRefreshing } = useAppSelector(authSelector);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

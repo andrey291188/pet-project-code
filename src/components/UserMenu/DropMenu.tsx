@@ -30,7 +30,7 @@ const DropMenu: React.FC<DropMenuProps> = ({
 }) => {
   const {access} = useSelector(authSelector)
 
-  const modalRoot: any = document.querySelector("#modal-root");
+  const modalRoot = document.querySelector("#modal-root") as HTMLDivElement;
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.code === "Escape") {

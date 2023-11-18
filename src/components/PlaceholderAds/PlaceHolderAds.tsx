@@ -1,8 +1,11 @@
 
 import { PlaceHolderImg, PlaceHolderWrapper } from "./PlaceHolderAds.styled";
 
+interface PlaceHolderAdsProps {
+  img: string;
+}
 
-const PlaceHolderAds = ({img}: any) => { 
+const PlaceHolderAds: React.FC<PlaceHolderAdsProps> = ({img}) => { 
   
   return (
     <PlaceHolderWrapper>

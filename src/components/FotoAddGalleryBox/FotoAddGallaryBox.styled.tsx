@@ -37,7 +37,7 @@ export const BtnDelete = styled.button`
   text-transform: uppercase;
   overflow: hidden;
   letter-spacing: 4px;
-
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 1000ms;
   &:hover {
     color: #03e9f4;
     border: 2px dashed #03e9f4;
@@ -69,7 +69,7 @@ export const PaginationBtn = styled.button`
   text-transform: uppercase;
   overflow: hidden;
   letter-spacing: 4px;
-
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 1000ms;
   &:hover {
     color: #03e9f4;
     border: 2px dashed #03e9f4;

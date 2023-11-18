@@ -1,6 +1,8 @@
 import { toast } from "react-toastify";
 import { ButtonReversForm, ButtonSubmit, FormikForm, InputField, Label,  RegisterFormTitle, SupportFormik, Wrapper } from "../../pages/User/RegisterLogin.styled"
 import { repeatSendVerify } from "../../service/authRequest";
+import { FormikHelpers } from 'formik';
+import { MyErrorType } from "store/authorization/thunkAuth";
 
 interface RegisterUser {
     email: string;
@@ -14,15 +16,16 @@ interface RegisterUser {
 
 const FormResendVerify: React.FC<FormRegisterProps> = ({setLinkVerify, setFormVisible, setLoader}) => {
   
-    const handleSubmit = async (values: RegisterUser, { resetForm }: any) => {
+    const handleSubmit = async (values: RegisterUser, { resetForm }: FormikHelpers<RegisterUser>) => {
       setLoader(true)
         try {
           const { data: {confirm_email} } = await repeatSendVerify(values)
           setLinkVerify(`${confirm_email}`)
           toast.success("Request sent successfully");
           resetForm()
-        } catch (error: any) {
-          toast.error(error.message);
+        } catch (error) {
+          const errorData = error as MyErrorType;
+          toast.error(errorData.message);
           setLoader(false)
         } finally {
           setLoader(false)

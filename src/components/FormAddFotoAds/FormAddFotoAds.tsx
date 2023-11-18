@@ -25,9 +25,9 @@ const FormAddFotoAds: React.FC<FormAddFotoAdsProps> = ({
   idAds,
 }) => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const [indexElement, setIndexElement] = useState<number>(0);
+  const [indexElement, setIndexElement] = useState(0);
   const filePicker = useRef<HTMLInputElement | null>(null);
-  const [loader, setLoader] = useState<boolean>(false);
+  const [loader, setLoader] = useState(false);
   const showFile = selectedFiles[indexElement];
 
   const handlePick = () => {
@@ -36,7 +36,7 @@ const FormAddFotoAds: React.FC<FormAddFotoAdsProps> = ({
     }
   };
 
-  const handleChange = async (e: any) => {
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target || !e.target.files || e.target.files.length === 0) {
       return;
     }
@@ -66,7 +66,7 @@ const FormAddFotoAds: React.FC<FormAddFotoAdsProps> = ({
     }
   };
 
-  const handleSubmit = async (values: any) => {
+  const handleSubmit = async () => {
     setLoader(true);
     const formData = new FormData();
     selectedFiles.forEach((file) => {

@@ -26,6 +26,7 @@ import { toast } from "react-toastify";
 import { getBuyById } from "../../service/buyRequest";
 import { Loader } from "../Loader/Loader";
 import { useState } from "react";
+import { MyErrorType } from "store/authorization/thunkAuth";
 
 interface User {
     _id: string;
@@ -59,7 +60,7 @@ interface User {
 
 const CardDetails = ({data, toggleModal}: DataProps) => {
   const { email } = useSelector(authSelector);
-  const [loader, setLoader] = useState<boolean>(false)
+  const [loader, setLoader] = useState(false)
   const { _id, price, title, fotoAds, owner, description, views} = data
   
   
@@ -72,9 +73,10 @@ const CardDetails = ({data, toggleModal}: DataProps) => {
       setLoader(true)
        await getBuyById(_id)
        toast.success("The purchase was completed succesfully, contact the seller if you would like to confirm the order faster")
-    } catch (error: any ) {
+    } catch (error) {
+      const { message } = error as MyErrorType;
+      toast.warning(message)  
       setLoader(false)
-      toast.warning(error.message)
     } finally {
       setLoader(false)
     }

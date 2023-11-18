@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import FotoAddGalleryBox from "../FotoAddGalleryBox/FotoAddGalleryBox";
 import { addFotoAds } from "../../service/adsRequest";
 import { Loader } from "../Loader/Loader";
+import { MyErrorType } from "store/authorization/thunkAuth";
 
 interface FormAddFotoAdsProps {
   getRequest: () => void;
@@ -25,9 +26,9 @@ const FormEditFotoAds: React.FC<FormAddFotoAdsProps> = ({
   idAds,
 }) => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const [indexElement, setIndexElement] = useState<number>(0);
+  const [indexElement, setIndexElement] = useState(0);
   const filePicker = useRef<HTMLInputElement | null>(null);
-  const [loader, setLoader] = useState<boolean>(false);
+  const [loader, setLoader] = useState(false);
   const showFile = selectedFiles[indexElement];
 
   const handlePick = () => {
@@ -36,7 +37,7 @@ const FormEditFotoAds: React.FC<FormAddFotoAdsProps> = ({
     }
   };
 
-  const handleChange = async (e: any) => {
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target || !e.target.files || e.target.files.length === 0) {
       return;
     }
@@ -66,7 +67,7 @@ const FormEditFotoAds: React.FC<FormAddFotoAdsProps> = ({
     }
   };
 
-  const handleSubmit = async (values: any) => {
+  const handleSubmit = async () => {
     setLoader(true);
     const formData = new FormData();
     selectedFiles.forEach((file) => {
@@ -75,8 +76,9 @@ const FormEditFotoAds: React.FC<FormAddFotoAdsProps> = ({
     try {
       await addFotoAds(idAds, formData);
       toast.success("Seccessfully added");
-    } catch (error: any) {
-      toast.warning(error.message);
+    } catch (error) {
+      const { message } = error as MyErrorType;
+      toast.warning(message);
       setLoader(false);
     } finally {
       getRequest();

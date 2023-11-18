@@ -5,7 +5,7 @@ axios.defaults.baseURL = BASE_URL;
 
 type Ads = {
   title: string;
-  price: number | null;
+  price: number | string;
   description: string;
 };
 

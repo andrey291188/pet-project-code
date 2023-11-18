@@ -27,12 +27,12 @@ interface Data {
 
 const Ads = () => {
     const [adsData, setAdsData] = useState<Data[]>([]);
-    const [loader, setLoader] = useState<boolean>(false);
+    const [loader, setLoader] = useState(false);
     const [page, setPage] = useState(1);
     const [queryParams, setQueryParams] = useSearchParams();
     const query = queryParams.get('query') ?? '';
     const [request, setRequest] = useState('');
-    const [btnVisible, setBtnVisible] = useState<number>(0);
+    const [btnVisible, setBtnVisible] = useState(0);
 
       useEffect(() => {
         getRequest(page, query);

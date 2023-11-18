@@ -6,6 +6,7 @@ import { useState } from "react";
 import { RootStore, useAppDispatch } from "../../store/store";
 import { useSelector } from "react-redux";
 import { createAdsDescription, createAdsPrice, createAdsTitle, resetState } from "../../store/createAds/createAdsReducer";
+import { MyErrorType } from "store/authorization/thunkAuth";
 
 interface FormCreateAdsProps {
   statusForm: (boolean: boolean) => void;
@@ -13,7 +14,7 @@ interface FormCreateAdsProps {
 }
 
 const authSelector = (state: RootStore) => {
-  return state.createAds as { title: string, price: number | null, description: string};
+  return state.createAds as { title: string, price: number | string, description: string};
 };
 
 const FormCreateAds: React.FC<FormCreateAdsProps> =  ({statusForm, setIdAds}) => {
@@ -28,9 +29,10 @@ const FormCreateAds: React.FC<FormCreateAdsProps> =  ({statusForm, setIdAds}) =>
           const createAds = await createAdsUser({title, price, description})
           setIdAds(createAds.data.result._id)
           toast.success("Seccessfully created")
-        } catch (error: any) {
+        } catch (error) {
+          const { message } = error as MyErrorType;
+          toast.warn(message)
           setLoader(false)
-          toast.warn(error.message)
           return
         } finally {
           setLoader(false)
@@ -39,7 +41,7 @@ const FormCreateAds: React.FC<FormCreateAdsProps> =  ({statusForm, setIdAds}) =>
         dispatch(resetState())
       };
 
-      const handleChangeInput = (e:any) => {
+      const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
 
          const {name, value} = e.target
 

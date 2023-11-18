@@ -26,6 +26,7 @@ import {
 } from "../../service/adsRequest";
 import FormEditFotoAds from "../FormEditFotoAds/FormEditFotoAds";
 import FormEditAds from "../FormEditAds/FormEditAds";
+import { MyErrorType } from "store/authorization/thunkAuth";
 
 export interface AdCard {
   active: boolean;
@@ -49,11 +50,11 @@ const AdsManagement = ({
   getRequest,
 }: CreateAdsCardsPreviewProps) => {
   const [indexElement, setIndexElement] = useState<number | null>(null);
-  const [imageView, setImageView] = useState<boolean>(false);
-  const [loader, setLoader] = useState<boolean>(false);
-  const [editImageModal, setEditImageModal] = useState<boolean>(false);
-  const [editDataModal, setEditDataModal] = useState<boolean>(false);
-  const [idAds, setIdAds] = useState<string>("");
+  const [imageView, setImageView] = useState(false);
+  const [loader, setLoader] = useState(false);
+  const [editImageModal, setEditImageModal] = useState(false);
+  const [editDataModal, setEditDataModal] = useState(false);
+  const [idAds, setIdAds] = useState("");
 
   const editData = dataCard.filter(({_id}) => _id === idAds)
 
@@ -111,9 +112,10 @@ const AdsManagement = ({
         toast.success(successMessage);
       }
       return response;
-    } catch (error: any) {
+    } catch (error) {
+      const { message } = error as MyErrorType;
+      toast.error("An error occurred: " + message);
       setLoader(false);
-      toast.error("An error occurred: " + error.message);
     } finally {
       setLoader(false);
     }

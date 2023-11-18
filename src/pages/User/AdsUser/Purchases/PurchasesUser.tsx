@@ -24,7 +24,7 @@ interface Data {
 
 const BuyerUser = () => {
   const [buyInfoData, setBuyInfoData] = useState<Data[]>([]);
-  const [loader, setLoader] = useState<boolean>(false);
+  const [loader, setLoader] = useState(false);
   
   useEffect(() => {
     getRequest();

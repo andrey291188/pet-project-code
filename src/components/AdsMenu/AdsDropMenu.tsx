@@ -10,7 +10,7 @@ interface DropMenuProps {
 
 const AdsDropMenu: React.FC<DropMenuProps> = ({setMenuActive, backdropClick}) => {
 
-    const modalRoot: any = document.querySelector("#modal-root");
+    const modalRoot = document.querySelector("#modal-root") as HTMLDivElement;
     useEffect(() => {
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.code === "Escape") {

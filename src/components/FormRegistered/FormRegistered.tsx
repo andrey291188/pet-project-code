@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
 import { ButtonReversForm, ButtonSubmit, DirectAnyForm, FormikForm, InputField, Label, NavDirect, RegisterFormTitle, SupportFormik, Wrapper } from "../../pages/User/RegisterLogin.styled"
 import { registerUser } from "../../service/authRequest";
+import { MyErrorType } from "store/authorization/thunkAuth";
 
 interface RegisterUser {
     name: string;
@@ -8,8 +9,6 @@ interface RegisterUser {
     phone: number | string;
     password: string
   }
-
- 
 
   interface FormRegisterProps {
     setLinkVerify: (boolean: string) => void;
@@ -20,7 +19,7 @@ interface RegisterUser {
 const FormRegister: React.FC<FormRegisterProps> = ({setLinkVerify, setFormVisible, setLoader}) => {
     
 
-    const handleSubmit = async (values: RegisterUser, { resetForm }: any) => {
+    const handleSubmit = async (values: RegisterUser, { resetForm }: { resetForm: () => void }) => {
         const {name, email, password, phone: phoneNumber} = values;
         const dataRegister = {name, email, password, phone: Number(phoneNumber)}
         setLoader(true)
@@ -29,8 +28,9 @@ const FormRegister: React.FC<FormRegisterProps> = ({setLinkVerify, setFormVisibl
           setLinkVerify(confirm_email)
           toast.success("You have seccessfully registered!");
           resetForm();
-        } catch (error: any) {
-          toast.error(error.message);
+        } catch (error) {
+          const { message } = error as MyErrorType;
+          toast.error(message);
           setLoader(false)
         }finally {
           setLoader(false)

@@ -72,7 +72,7 @@ export const ButtonSubmit = styled.button`
   text-transform: uppercase;
   overflow: hidden;
   letter-spacing: 4px;
-
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 1000ms;
   &:hover {
     background: #03e9f4;
     box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 35px #03e9f4,

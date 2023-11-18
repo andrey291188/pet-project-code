@@ -35,6 +35,11 @@ export const MenuUserButton = styled.button<StyledButtonProps>`
   color: ${(props) => (props.$active ? "black" : "white")};
   display: flex;
   align-items: center;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 1000ms;
+  &:hover {
+   color: greenyellow;
+   border: solid 2px greenyellow;
+  }
 `;
 
 export const MenuWrapper = styled.ul`
@@ -77,6 +82,7 @@ export const LogoutButton = styled.button`
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.3);
   color: white;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 1000ms;
   &:hover,
   :focus {
     background: #03e9f4;
@@ -95,6 +101,7 @@ export const AddAds = styled.button`
   border: solid 2px black;
   border-radius: 4px;
   background-color: white;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 1000ms;
   &:hover,
   :focus {
     border: solid 2px #03e9f4;

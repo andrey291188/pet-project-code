@@ -1,4 +1,5 @@
 import { logInThunk } from "../../../store/authorization/thunkAuth";
+import { FormikHelpers } from 'formik';
 import { useAppDispatch } from "../../../store/store";
 import {
   SupportFormik,
@@ -21,7 +22,7 @@ interface LoginUser {
 const Login = () => {
   const dispatch = useAppDispatch()
 
-  const handleSubmit = async (values: LoginUser, { resetForm }: any) => {
+  const handleSubmit = async (values: LoginUser, { resetForm }: FormikHelpers<LoginUser>) => {
     dispatch(logInThunk(values))
     resetForm();
   };

@@ -13,6 +13,8 @@ import CardDetails from "./CardDetails";
 import { Loader } from "../Loader/Loader";
 import Modal from "../Modal/Modal";
 import ImageGallery from "../ImageGallery/ImageGallery";
+import { MyErrorType } from "store/authorization/thunkAuth";
+import { toast } from "react-toastify";
 
 interface User {
   _id: string;
@@ -50,8 +52,8 @@ interface DataAds  {
 const AdsDetails = () => {
   const [detailsAdsData, setDetailsAdsData] = useState<Data>();
   const [adsData, setAdsData] = useState<DataAds[]>([]);
-  const [loader, setLoader] = useState<boolean>(false);
-  const [imgDetails, setImgDetails] = useState<boolean>(false)
+  const [loader, setLoader] = useState(false);
+  const [imgDetails, setImgDetails] = useState(false)
   const { adsID } = useParams();
   const location = useLocation();
   const backLocationRefs = useRef(location.state?.from ?? "/ads")
@@ -75,6 +77,8 @@ const getRequest = async (id: string) => {
       setAdsData([...result])
 
   } catch (error) {
+    const { message } = error as MyErrorType;
+          toast.error(message);
       setLoader(false);
   } finally {
       setLoader(false);

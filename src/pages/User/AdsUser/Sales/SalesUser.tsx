@@ -25,7 +25,7 @@ interface Data {
 
 const SellerUser = () => {
   const [sellInfoData, setSellInfoData] = useState<Data[]>([]);
-  const [loader, setLoader] = useState<boolean>(false);
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     getRequest();

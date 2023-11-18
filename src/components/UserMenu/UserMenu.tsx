@@ -1,8 +1,7 @@
-import { useState, MouseEvent } from "react";
+import { useState } from "react";
 import {  AvatarUser, MenuUserButton, UserMenuWrapper } from "./UserMenu.styled";
-import { RootStore, useAppDispatch } from "../../store/store";
+import { RootStore, useAppDispatch, useAppSelector } from "../../store/store";
 import { logOutThunk } from "../../store/authorization/thunkAuth";
-import { useSelector } from "react-redux";
 import Modal from "../Modal/Modal";
 import FormCreateAds from "../FormCreateAds/FormCreateAds";
 import FormAddFotoAds from "../FormAddFotoAds/FormAddFotoAds";
@@ -10,23 +9,22 @@ import DropMenu from "./DropMenu";
 import AvatarUpdate from "../AvatarUpdate/AvatarUpdate";
 import { useNavigate } from "react-router-dom";
 
-type ClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => void;
-
 const authSelector = (state: RootStore) => {
   return state.auth as { user: string, avatar: string};
 };
 
 const UserMenu: React.FC = () => {
-  const [showModal, setShowModal] = useState<boolean>(false);
-  const [menuActive, setMenuActive] = useState<boolean>(false);
-  const [imgForm, setImgForm] = useState<boolean>(false);
-  const [avatarModal, setAvatarModal] = useState<boolean>(false)
+  const {user, avatar} = useAppSelector(authSelector)
+  
+  const [showModal, setShowModal] = useState(false);
+  const [menuActive, setMenuActive] = useState(false);
+  const [imgForm, setImgForm] = useState(false);
+  const [avatarModal, setAvatarModal] = useState(false)
   const [idAds, setIdAds] = useState("");
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
   
-  const {user, avatar} = useSelector(authSelector)
 
 
   const toggleModal = () => {
@@ -46,7 +44,7 @@ const UserMenu: React.FC = () => {
      navigate("/")
     }
 
-  const handleMenuClick: ClickHandler = (event) => {
+  const handleMenuClick = (e: React.MouseEvent<HTMLElement>) => {
     setMenuActive(!menuActive);
   };
 

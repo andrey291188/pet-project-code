@@ -11,7 +11,6 @@ import {
   currentUserThunk,
   logInThunk,
   logOutThunk,
-  // registerThunk,
   updateAvatarThunk,
 } from "./thunkAuth";
 
